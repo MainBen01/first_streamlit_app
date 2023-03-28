@@ -13,8 +13,6 @@ streamlit.text('🥑🍞 Avocato Toast')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 
-
-
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
@@ -50,8 +48,9 @@ except URLError as e:
 add_my_fruit = streamlit.text_input('What fruit would you like add?','Jackfruit')
 streamlit.write ('Thanks for adding', add_my_fruit)
 
-
-
+#this will not work correctly, but just go with it for now
+ my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+   
  # dont run anything past here while we troubleshoot
 streamlit.stop()
 
@@ -67,7 +66,7 @@ def get_fruit_load_list():
       my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
       my_data_rows = get_fruit_load_list()      
       streamlit.dataframe(my_data_rows)
-      my_cur.execute("insert into fruit_load_list values ('from streamlit')")
+     
       
 
 
